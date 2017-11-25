@@ -1,4 +1,5 @@
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
 
@@ -17,9 +18,34 @@ int main(int argc, char **argv) {
 		return -2;
 	}
 
+	/* Begin Processing */
+	image.convertTo(image, CV_32F, 1/255.0);
+
+	/* Calculate Gradient in x and y direction*/
+	Mat gx, gy;
+	Sobel(image, gx, CV_32F, 1, 0, 1);
+	Sobel(image, gy, CV_32F, 0, 1, 1);
+
+	/* Find magnitude and orientation */
+	Mat mag, angle;
+	cartToPolar(gx, gy, mag, angle, 1);
+
+
 	namedWindow("Display window", WINDOW_AUTOSIZE);
 	imshow("Display window", image);
-
 	waitKey(0);
+	
+	imshow("Display window", gx);
+	waitKey(0);
+	
+	imshow("Display window", gy);
+	waitKey(0);
+	
+	imshow("Display window", mag);
+	waitKey(0);
+	
+	imshow("Display window", angle);
+	waitKey(0);
+
 	return EXIT_SUCCESS;
 }
