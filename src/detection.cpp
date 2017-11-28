@@ -1,4 +1,5 @@
 #include <opencv2/core/core.hpp>
+#include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
@@ -18,33 +19,38 @@ int main(int argc, char **argv) {
 		return -2;
 	}
 
-	/* Begin Processing */
-	image.convertTo(image, CV_32F, 1/255.0);
+	/* http://answers.opencv.org/question/22420/human-detection-with-hog-how-to-improve-it/ */
+	/* Default people detector */
+	HOGDescriptor hog;
+	hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
 
-	/* Calculate Gradient in x and y direction*/
-	Mat gx, gy;
-	Sobel(image, gx, CV_32F, 1, 0, 1);
-	Sobel(image, gy, CV_32F, 0, 1, 1);
+	/* For holding the objects */
+	vector<Rect> found, found_filtered; 
 
-	/* Find magnitude and orientation */
-	Mat mag, angle;
-	cartToPolar(gx, gy, mag, angle, 1);
-
+	/* Input image, object_boundaries, hit_threshold, window_stride, padding,  */
+	hog.detectMultiScale(image, found, 0, Size(8,8), Size(32,32), 1.05, 2);
+	size_t i, j;
+	for (i=0; i<found.size(); i++)
+	{
+		Rect r = found[i];
+		for (j=0; j<found.size(); j++)
+			if (j!=i && (r & found[j])==r)
+				break;
+		if (j==found.size())
+			found_filtered.push_back(r);
+	}
+	for (i=0; i<found_filtered.size(); i++)
+	{
+		Rect r = found_filtered[i];
+		r.x += cvRound(r.width*0.1);
+		r.width = cvRound(r.width*0.8);
+		r.y += cvRound(r.height*0.06);
+		r.height = cvRound(r.height*0.9);
+		rectangle(image, r.tl(), r.br(), cv::Scalar(0,255,0), 2);
+	}
 
 	namedWindow("Display window", WINDOW_AUTOSIZE);
 	imshow("Display window", image);
-	waitKey(0);
-	
-	imshow("Display window", gx);
-	waitKey(0);
-	
-	imshow("Display window", gy);
-	waitKey(0);
-	
-	imshow("Display window", mag);
-	waitKey(0);
-	
-	imshow("Display window", angle);
 	waitKey(0);
 
 	return EXIT_SUCCESS;
