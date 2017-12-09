@@ -6,6 +6,13 @@
 sudo apt-get update
 sudo apt-get install libopencv-dev
 ```
+## Report Requirements
+- A comprehensive description of the system you developed.
+- Explain your methods, some illustration figures of the results, as well as any remaining issues and potential solutions.
+- Team member list with role assignments for each member.
+- Include a Youtube link of your project
+- upload all the source code, executable, report onto the Canvas.
+- Bring a hardcopy to the class
 
 ## Links
 ### OpenCV
