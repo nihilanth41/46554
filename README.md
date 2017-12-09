@@ -20,4 +20,5 @@ sudo apt-get install libopencv-dev
 [Histogram of Oriented Gradients](https://www.learnopencv.com/histogram-of-oriented-gradients/)  
 [Gait Recognition](https://mediatum.ub.tum.de/doc/1304824/1304824.pdf)  
 [Pedestrian Detection](https://www.pyimagesearch.com/2015/11/09/pedestrian-detection-opencv/)
+[Multiscale Params](https://stackoverflow.com/questions/20801015/recommended-values-for-opencv-detectmultiscale-parameters)
 
