@@ -7,6 +7,12 @@
 using namespace cv;
 using namespace std;
 
+/* TODO:
+ - Nonmaxima supression
+ - detectMultiscale parameters (scales?) 
+ - Moar sample data (see README)
+*/
+
 int main(int argc, char **argv) {
 	if(argc != 2) {
 		cout << "Usage: ./detection.bin <path/to/image>" << endl;

@@ -21,6 +21,7 @@ sudo apt-get install libopencv-dev
 [Gait Recognition](https://mediatum.ub.tum.de/doc/1304824/1304824.pdf)  
 [Pedestrian Detection](https://www.pyimagesearch.com/2015/11/09/pedestrian-detection-opencv/)   
 [Multiscale Params](https://stackoverflow.com/questions/20801015/recommended-values-for-opencv-detectmultiscale-parameters)   
+[OpenCV Pedestrian Params](https://stackoverflow.com/questions/26607418/improving-accuracy-opencv-hog-people-detector)
 
 ### Data Sets
 [INRIA Person DB](http://pascal.inrialpes.fr/data/human/)   
